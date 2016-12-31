@@ -1,0 +1,34 @@
+@import '../../resources/scss/vars';
+@import '../../resources/scss/mixins';
+
+.page {
+
+  .page-content {
+
+    .page-header {
+      margin-bottom: 20px;
+
+      .page-title-wrapper {
+        @include implicit-link($content-font-color);
+
+        .page-title {
+          margin-bottom: 0;
+        }
+      }
+    }
+
+    .page-body {
+      margin-top: 30px;
+      margin-bottom: 50px;
+    }
+
+    .page-description {
+    }
+
+    .page-footer {
+      border-bottom: 1px solid $decoration-color;
+      margin-top: 20px;
+      margin-bottom: 0;
+    }
+  }
+}

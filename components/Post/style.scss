@@ -1,0 +1,43 @@
+@import '../../resources/scss/vars';
+@import '../../resources/scss/mixins';
+
+.post {
+
+  .post-content {
+
+    .post-header {
+      margin-bottom: 20px;
+
+      .post-datetime-wrapper  {
+
+        .post-datetime {
+        }
+      }
+
+      .post-title-wrapper {
+        margin-bottom: 0;
+
+        .post-title {
+          @include implicit-link($content-font-color);
+        }
+      }
+
+      .tags {
+      }
+    }
+
+    .post-description {
+    }
+
+    .post-body {
+      margin-top: 30px;
+      margin-bottom: 50px;
+    }
+
+    .post-footer {
+      border-bottom: 1px solid $decoration-color;
+      margin-top: 20px;
+      margin-bottom: 0;
+    }
+  }
+}

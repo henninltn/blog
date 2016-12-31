@@ -1,0 +1,96 @@
+@import '../../resources/scss/mixins';
+@import '../../resources/scss/vars';
+
+.date-nav {
+  @include content-box();
+
+  .date-nav-header {
+    font-size: 1.2rem;
+    border-bottom: 1px solid $decoration-color;
+    line-height: 1.5rem;
+    padding-bottom: 10px;
+  }
+
+  ul {
+    list-style: none;
+    margin-bottom: 0;
+    margin-top: 0;
+
+    li {
+      margin-bottom: 0;
+    }
+  }
+
+  .year-nav {
+    margin-bottom: 10px;
+
+    .year-link {
+    }
+
+    .month-nav-list {
+
+      .month-nav-wrapper {
+        margin-bottom: 5px;
+
+        .month-nav {
+
+          .month-link {
+          }
+
+          .day-nav-list {
+
+            .week-list-wrapper:first-child {
+
+              .week-list {
+
+                .day-nav {
+                  border-top: 1px solid $decoration-color;
+                }
+              }
+            }
+
+            .week-list-wrapper {
+
+              .week-list {
+                @include row-ul();
+                margin-left: 0;
+                max-width: 180px;
+
+                .linked-day {
+                  a {
+                    background-color: $bg-link-color;
+                  }
+                }
+
+                .invalid-day {
+                  color: $decoration-color;
+                }
+
+                .day-nav:first-child {
+                  border-left: 1px solid $decoration-color;
+                }
+
+                .day-nav {
+                  border-right: 1px solid $decoration-color;
+                  border-bottom: 1px solid $decoration-color;
+                  width: 100%;
+                  height: 100%;
+                  text-align: right;
+
+                  .day-link {
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                  }
+
+                  .day-text {
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

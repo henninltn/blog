@@ -1,0 +1,53 @@
+@import '../../resources/scss/vars';
+@import '../../resources/scss/mixins';
+
+.main-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 50px 0 35px 0;
+
+  .site-title-container {
+    margin-bottom: 15px;
+
+    .site-title-wrapper {
+      margin-bottom: 0;
+
+      .site-title {
+        @include implicit-link($base-font-color);
+        white-space: nowrap;
+      }
+    }
+
+    .site-sub-title {
+      color: $base-font-color;
+      font-size: 0.9rem;
+      margin-bottom: 0;
+    }
+  }
+
+  .main-header-nav {
+
+    .nav-wrapper {
+      @include row-ul();
+      margin-bottom: 0;
+      margin-left: 0;
+      flex-wrap: wrap;
+
+      li {
+        margin-bottom: 30px;
+        margin-left: 30px;
+
+        a {
+          @include implicit-link($base-font-color);
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .main-header {
+    flex-wrap: wrap;
+  }
+}

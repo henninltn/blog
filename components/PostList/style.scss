@@ -1,0 +1,16 @@
+@import '../../resources/scss/mixins';
+
+.posts {
+
+  .post {
+    margin-bottom: 30px;
+  }
+
+  .no-contents {
+    @include content-box();
+
+    .no-contents-header {
+      margin-bottom: 0;
+    }
+  }
+}

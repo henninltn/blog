@@ -1,0 +1,16 @@
+siteTitle = "飽き性の活動記録"
+
+siteSubTitle = "色々なことに手を出しすぎて「今まで何してきたんだっけ」ってなるので。"
+
+siteAuthor = "hennin"
+
+linkPrefix = "/henninltn.github.io"
+
+[[tags]]
+  name = "JavaScript"
+[[tags]]
+  name = "ES6"
+[[tags]]
+  name = "React"
+[[tags]]
+  name = "Lisp"
