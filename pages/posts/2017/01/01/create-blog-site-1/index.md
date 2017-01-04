@@ -1,7 +1,7 @@
 ---
 title: ブログサイトを作った話 (その１)
 date: 2017-01-01T04:20:28+09:00
-path: posts/2016/12/28/create-blog-site-1/
+path: /2017/01/01/create-blog-site-1/
 tags: JavaScript, ES6, React
 description: Gatsbyでブログサイト作ろうとしたときの懊悩とか苦悶とか。
 ---

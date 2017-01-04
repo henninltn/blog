@@ -16,7 +16,7 @@ class Tag extends React.Component {
 
     return (
       <div className="tag">
-        <Link className="tag-name" to={prefixLink('/tags/' + tagInfo.name)}>{tagInfo.name}</Link>
+        <Link className="tag-name" to={prefixLink(`/tags/${tagInfo.name}/`)}>{tagInfo.name}</Link>
       </div>
     )
   }

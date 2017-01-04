@@ -23,10 +23,10 @@ class Header extends React.Component {
               <Link>Archives</Link>
             </li>
             <li>
-              <a href="https://github.com/henninltn" target="_blank">Github</a>
+              <a href={`https://github.com/${config.githubId}`} target="_blank">Github</a>
             </li>
             <li>
-              <a href="https://twitter.com/AS_predri" target="_blank">Twitter</a>
+              <a href={`https://twitter.com/${config.twitterId}`} target="_blank">Twitter</a>
             </li>
           </ul>
         </nav>

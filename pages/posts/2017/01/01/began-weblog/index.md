@@ -1,7 +1,7 @@
 ---
 title: ブログを始めた話
 date: 2017-01-01T04:00:05+09:00
-path: posts/2016/12/24/began-blog/
+path: /2017/01/01/began-blog/
 tags: JavaScript, ES6, React
 description: ブログを始めた理由とか、何使ったかとか。
 ---

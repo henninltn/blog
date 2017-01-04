@@ -15,39 +15,34 @@ class Post extends React.Component {
     }
   }
   render() {
-    const post = this.props.post
+    const { post, headerOnly } = this.props
     const data = post.data
-
-    let contents = [
-      <header key="post-header" className="post-header">
-        <time className="post-datetime-wrapper" dateTime={data.date} itemProp="datePublished">
-          <Link className="post-datetime" to={prefixLink('/' + moment(data.date).format('YYYY/MM/DD'))}>
-            {moment(data.date).format('YYYY-MM-DD')}
-          </Link>
-        </time>
-        <h1 className="post-title-wrapper" itemProp="headline">
-          <Link className="post-title" to={prefixLink(post.path)}>
-            {data.title}
-          </Link>
-        </h1>
-        <TagList className="tags" tags={data.tags}/>
-      </header>,
-      <div key="post-description" className="post-description">{data.description}</div>
-    ]
-
-    if (! this.props.headerOnly)
-      contents.push(<div key="post-body" className="post-body" itemProp="articleBody"
-                         dangerouslySetInnerHTML={ { __html: data.body } } />)
-
-    contents.push(<footer key="post-footer" className="post-footer"/>)
+    const { date, path, title, tags, description, body } = data
 
     return (
       <article className="post" itemScope itemType="http://schema.org/BlogPosting">
         <Helmet
-          title={`${config.siteTitle} | ${data.title}`}
+          title={`${config.siteTitle} | ${title}`}
         />
         <div className="post-content">
-          { contents }
+          <header key="post-header" className="post-header">
+            <time className="post-datetime-wrapper" dateTime={date} itemProp="datePublished">
+              <Link className="post-datetime" to={prefixLink(`/${moment(date).format('YYYY/MM/DD')}/`)}>
+                {moment(date).format('YYYY-MM-DD')}
+              </Link>
+            </time>
+            <h1 className="post-title-wrapper" itemProp="headline">
+              <Link className="post-title" to={prefixLink(path)}>
+                {title}
+              </Link>
+            </h1>
+            <TagList className="tags" tags={tags}/>
+          </header>
+          <div key="post-description" className="post-description">{description}</div>
+          { headerOnly ? ''
+            : <div key="post-body" className="post-body" itemProp="articleBody"
+                   dangerouslySetInnerHTML={ { __html: body } } /> }
+          <footer key="post-footer" className="post-footer"/>
         </div>
       </article>
     )

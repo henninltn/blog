@@ -19,10 +19,9 @@ class Template extends React.Component {
     }
   }
   render () {
-    const children = this.props.children,
-      route = this.props.route
+    const { children, route } = this.props
 
-    const collectTags = tags => tags === undefined || tags === "" || config.tags === undefined ? []
+    const collectTags = tags => tags === undefined || tags === null || tags === "" || config.tags === undefined ? []
       : config.tags.map(tagObj => tagObj.name).filter(tagName => tags.includes(tagName))
 
     for (let i = 0; i < route.pages.length; i++) {

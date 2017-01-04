@@ -4,7 +4,10 @@ siteSubTitle = "色々なことに手を出しすぎて「今まで何してき�
 
 siteAuthor = "hennin"
 
-linkPrefix = "/henninltn.github.io"
+linkPrefix = "/localhost"
+
+twitterId = "AS_predri"
+githubId = "henninltn"
 
 [[tags]]
   name = "JavaScript"

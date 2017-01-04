@@ -23,10 +23,8 @@ class Collapse extends React.Component {
     this.setState({ isShown: !this.state.isShown})
   }
   render() {
-    const className = this.props.className,
-      label = this.props.label,
-      children = this.props.children,
-      isShown = this.state.isShown
+    const { className, label, children } = this.props
+    const isShown = this.state.isShown
 
     return (
       <div className={`collapse-wrapper ${className}`}>

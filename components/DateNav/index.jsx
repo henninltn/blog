@@ -3,6 +3,7 @@ import { Link }                     from 'react-router'
 import { List, Map, Range, Repeat } from 'immutable'
 import { prefixLink }               from 'gatsby-helpers'
 import moment                       from 'moment'
+import conditions                   from '../../utils/conditions'
 import { config }                   from 'config'
 import Collapse                     from '../Collapse'
 import                                   './style.scss'
@@ -16,8 +17,8 @@ class DateNav extends React.Component {
   render() {
     const pages = this.props.pages
 
-    const dateMap = pages.reduce((accum, page) =>
-        page.data.date === undefined || page.data.date === "" ? accum :
+    const dateMap = pages.filter(conditions.isPost).reduce((accum, page) =>
+        ! conditions.ifExists(page.data.date) || page.data.date === "" ? accum :
           List(moment(page.data.date).format('YYYY-MM-DD').split('-'))
             .push(true).reverse()
             .reduce((accum, i) => Map().set(i, accum))
@@ -32,13 +33,13 @@ class DateNav extends React.Component {
     }
 
     const children = dateMap.map((monthMap, year) => {
-      const yearLink = `/${year}`
+      const yearLink = `/${year}/`
       return (
         <Collapse className="year-nav" key={yearLink}
                   label={<Link className="year-link" to={prefixLink(yearLink)}>{ year }</Link>}>
           <ul className="month-nav-list">
             { monthMap.map((dayMap, month) => {
-              const monthLink = `${yearLink}/${month}`
+              const monthLink = `${yearLink}${month}/`
               return (
                 <li className="month-nav-wrapper" key={monthLink}>
                   <Collapse className="month-nav"
@@ -51,8 +52,9 @@ class DateNav extends React.Component {
                                 const dateObj = new Date(year, month - 1, day),
                                   displayedMonth = dateObj.getMonth() + 1,
                                   displayedDate = dateObj.getDate()
-                                const dayLink = `${yearLink}/${displayedMonth}/${displayedDate}`
-                                const ifLinkedDay = dayMap.get(('00' + day).slice(-2), false)
+                                const paddingFilter = num => ('00' + num).slice(-2)
+                                const dayLink = `${yearLink}${paddingFilter(displayedMonth)}/${paddingFilter(displayedDate)}/`
+                                const ifLinkedDay = dayMap.get(paddingFilter(day), false)
                                 const classNames = `${parseInt(month) !== displayedMonth ? 'invalid-day'
                                   : ifLinkedDay ? 'linked-day' : ''}`
 
