@@ -9,7 +9,7 @@ description: Gatsbyでブログサイト作ろうとしたときの懊悩とか�
 長くなりそうなのでその１。
 
 ## ちょっとHexoを触ってみた
-- 静的サイトジェネレータが何者
+- 静的サイトジェネレータって何者
 - 有名どころ触って感触掴みたい
 - [公式サイト](https://hexo.io/)おしゃれ
 
@@ -61,7 +61,7 @@ $ hexo deploy
 
 
 ## Gatybyに決めた
-- Hexoで静的サイトジェネレータの雰囲気つかめた
+- Hexoで静的サイトジェネレータの雰囲気がつかめた
 - のでもっかい調べる [StaticGen](https://www.staticgen.com/)
 - Ctrl(Command)+F JavaScript
 - Templates: Reactとかある..
@@ -73,8 +73,8 @@ $ hexo deploy
 - 星多いしGatsbyにしよう
 
 
-## Gatsby触ってみた
-- Githubの[README](https://github.com/gatsbyjs/gatsby)
+## Gatsbyを触ってみた
+- まずはGithubの[README](https://github.com/gatsbyjs/gatsby)を読む
 - ファッツ
 - 取り敢えずGetting started
 ```
@@ -100,12 +100,12 @@ Listening at:
 
 ## Gatsbyについて調べた
 - 「Gatsby 静的サイトジェネレータ」
-- MOONGIFT貴様いつも役に立たないな
+- MOONGIFT貴様いつも役に立たないな (
+冗談ダヨ)
 - てかすっくね..
 - [React.js製の静的サイトジェネレーターGatsbyに移行した](http://qiita.com/jaxx2104/items/5f28915355a85d36e38a)
 - めっちゃ参考になる.. (というかほぼ丸パクリ)
-- ```gatsby new blog https://github.com/gatsbyjs/gatsby-starter-blog```で公式？のテンプレートをもとにサイト作れる
-- 薄々感じてたけどGatsbyにはテーマとかないので自分で全部作ることになりそう..
+- 薄々感じてたけどGatsbyはテーマとか少なそう(というかほぼない)なので自分で全部作ることになりそう..
 
 
 ## 方針が決まった

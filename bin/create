@@ -1,0 +1,25 @@
+#!/bin/sh
+
+readonly TITLE=$1
+readonly DIRPATH=./pages/drafts/${title}
+
+if [ -e $DIRPATH ]; then
+  echo "the post '${DIRPATH}' already exists"
+  exit
+fi
+
+mkdir -p "${DIRPATH}"
+
+date_str=`date --rfc-3339 -d`
+echo $date_str
+# awk
+
+cat << EOS
+---
+title: "$TITLE"
+date: "date --rfc-3339i=seconds -d"
+path:
+tags:
+description:
+---
+EOS
