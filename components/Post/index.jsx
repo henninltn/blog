@@ -25,7 +25,7 @@ class Post extends React.Component {
           title={`${config.siteTitle} | ${title}`}
         />
         <div className="post-content">
-          <header key="post-header" className="post-header">
+          <header className="post-header">
             <time className="post-datetime-wrapper" dateTime={date} itemProp="datePublished">
               <Link className="post-datetime" to={prefixLink(`/${moment(date).format('YYYY/MM/DD')}/`)}>
                 {moment(date).format('YYYY-MM-DD')}
@@ -38,11 +38,11 @@ class Post extends React.Component {
             </h1>
             <TagList className="tags" tags={tags}/>
           </header>
-          <div key="post-description" className="post-description">{description}</div>
+          <div className="post-description">{description}</div>
           { headerOnly ? ''
-            : <div key="post-body" className="post-body" itemProp="articleBody"
+            : <div className="post-body" itemProp="articleBody"
                    dangerouslySetInnerHTML={ { __html: body } } /> }
-          <footer key="post-footer" className="post-footer"/>
+          <footer className="post-footer"/>
         </div>
       </article>
     )

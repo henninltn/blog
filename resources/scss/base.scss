@@ -6,15 +6,6 @@ body {
   margin: 0 30px 0 30px;
 }
 
-main, aside {
-}
-
-main {
-}
-
-aside {
-}
-
 article {
   @include content-box();
 }

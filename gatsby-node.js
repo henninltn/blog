@@ -10,11 +10,5 @@ exports.modifyWebpackConfig = function(config, env) {
       })
     ]
   })
-
-  // config.loader('scss', {
-  //   test: /\.scss$/,
-  //   loaders: ['style', 'css', 'postcss?parser=sugarss']
-  // })
-
   return config
 }

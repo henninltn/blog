@@ -4,25 +4,12 @@
   background-color: $content-color;
   box-shadow: 1px 2px 3px $shadow-color;
   padding: 20px;
-  h1 {
-    font-size: 1.7rem;
-  }
-  h2 {
-    font-size: 1.4rem;
-    border-bottom: 1px solid $decoration-color;
-  }
-  h3 {
-    font-size: 1.2rem;
-  }
-  h4 {
-    font-size: 1rem;
-  }
-  h5 {
-    font-size: 0.9rem;
-  }
-  h6 {
-    font-size: 0.8rem;
-  }
+  h1 {  font-size: 1.7rem;  }
+  h2 {  font-size: 1.4rem;  border-bottom: 1px solid $decoration-color;  }
+  h3 {  font-size: 1.2rem;  }
+  h4 {  font-size: 1rem;  }
+  h5 {  font-size: 0.9rem;  }
+  h6 {  font-size: 0.8rem;  }
 }
 
 @mixin implicit-link($color) {

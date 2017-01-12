@@ -31,7 +31,7 @@ class PostList extends React.Component {
        */
       .filter(page => page.requirePath.match(
         new RegExp('^posts/'
-          + [day, month, year].reduce((accum, i) => i !== undefined && i !== null && i !== "" ? `${i}/${accum}` : '.*', '.*')
+          + [day, month, year].reduce((accum, i) => conditions.ifExists(i) && i !== "" ? `${i}/${accum}` : '.*', '.*')
           + '/index.md$')))
       .sort((post1, post2) => moment(post2.data.date).format('x') - moment(post1.data.date).format('x'))
       .map(post => <Post key={post.path} className="post" post={post} headerOnly={true}/>)
