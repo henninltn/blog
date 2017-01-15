@@ -1,7 +1,7 @@
 ---
 title: ブログサイトを作った話 (その３)
 date: 2017-01-12T22:50:01+09:00
-path: /2017/01/12/create-blog-site-3/
+path: /2017/01/12/created-blog-site-3/
 tags: JavaScript, ES6, React
 description: Gatybyでブログサイトを作るのに作成したコンポーネントについて。
 ---

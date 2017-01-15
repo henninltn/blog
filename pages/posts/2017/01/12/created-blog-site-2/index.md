@@ -1,7 +1,7 @@
 ---
 title: ブログサイトを作った話 (その２)
 date: 2017-01-12T22:50:00+09:00
-path: /2017/01/12/create-blog-site-2/
+path: /2017/01/12/created-blog-site-2/
 tags: JavaScript, ES6, React
 description: Gatsbyでブログサイトを実際に作ってるときの試行錯誤とか。
 ---
