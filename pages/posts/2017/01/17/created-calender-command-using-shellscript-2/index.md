@@ -1,7 +1,7 @@
 ---
 title: シェルスクリプトでcalenderコマンドを作った話 (その２)
-date: 2017-01-15T12:50:00+09:00
-path: /2017/01/15/created-calender-command-using-shellscript-2/
+date: 2017-01-17T01:40:00+09:00
+path: /2017/01/17/created-calender-command-using-shellscript-2/
 tags: ShellScript
 description: シェルスクリプトでコマンドを作成した過程。
 ---
@@ -15,9 +15,11 @@ description: シェルスクリプトでコマンドを作成した過程。
 
 
 ## calenderコマンドを作った
-- zshから実行してる
-- シバン(下で説明する)は```#!/bin/bash```
 - まずは結果から
+
+![カレンダー](00-result.png)
+- あるだろうとは思ってたけど```cal```コマンドの存在を後で知った
+- まあシェルスクリプトの練習なので別にいいことにしとく
 
 
 
@@ -148,7 +150,7 @@ done
 
 
 ### echoでの色付けについて
-- [シェル - echoで文字に色をつける その1 - Miuran Business Systems ](シェル - echoで文字に色をつける その1 - Miuran Business Systems )
+- [シェル - echoで文字に色をつける その1 - Miuran Business Systems ](http://www.m-bsys.com/linux/echo-color-1)
 ```bash
 hoge=hoge
 echo -e "\e[31m${hoge}\e[m"
@@ -478,8 +480,220 @@ done
 ![カレンダー](05-refactoring.png)
 
 
+
+## 何月か表示させた
+```bash
+echo "      "`mydate $y-$m-01 0 %B%Y`
+```
+- これはさんだ
+
+
+
+## その月以外の日付の色を変えようとして結局非表示にした
+- 灰色とか目立たない色にしたい
+- Black、Red、Green、Yellow、Blue、Magenta、Cyan、Whiteしかない
+- 無理ぽよ..
+- もう非表示でいいかな
+- 今このコマンドめっちゃ重いし、非表示にするなら不正な日付を```mydate```で戻さなくていいし軽くなるかも
+```bash
+seq $from $to|while read m;do
+  day1=`mydate $y-$m-01 0 %w`
+  lastd=`mydate $y-$((m%12+1))-00 0 %d`
+  echo "      "`mydate $y-$m-01 0 %B%Y`
+  seq 0 6|while read n;do echo "$(seq 1 7|while read day;do
+    d=$((day+(n-1)*7-day1))
+    if [ $day = 1 ];  then printf $RED
+    elif [ $day = 7 ];then printf $BLUE
+    else                   printf $WHITE; fi
+    if [ $n = 0 ];then
+      printf "%s " `mydate $y-$m-$(($day-day1+7)) 0 %a`
+    elif [ 0 -lt $d -a $d -le $lastd ]; then
+      printf "%2d " $d
+    else
+      printf "   "
+    fi
+    printf $OFF;
+  done)";done
+  echo
+done
+```
+- どうせ不正な日付は非表示にするので```mydate```を使わないようにした
+- 月初めの曜日と最終日の算出、何月かの表示には```mydate```を使っている
+- ```[ 0 -lt $d -a $d -le $lastd ]```で不正な日付を判定
+- あと空白が無視されたので、この行の入れ子のシーケンスを```""```でかこった
+```bash
+seq 0 6|while read n;do echo "$(seq 1 7|while read day;do
+```
+- それにともなって```printf```のフォーマットも変更
+- まあ実はこの空白無視問題でどこに```""```入れるかとか```echo```と```printf```どっち使うかとか試すのに結構時間食われた
+
+![カレンダー](06-hiding.png)
+- 空行がばらばらなの気になる..
+- そのうち月と月の間の空行を１行に統一したい
+
+
+
+## 指定日の色を変えた
+- ```calender <year> <month> <date>```とした時の挙動
+- 第３引数で指定した日付の背景色と文字色を反転表示
+- ついでに変数名ややこしかったので変えた
+```bash
+readonly REVERSE_WHITE="\033[37;7m"
+
+# ~中略~
+
+seq $from $to|while read cur_m;do
+  day1=`mydate $y-$cur_m-01 0 %w`
+  lastd=`mydate $y-$((cur_m%12+1))-00 0 %d`
+  echo "      "`mydate $y-$cur_m-01 0 %B%Y`
+  seq 0 6|while read n;do echo "$(seq 1 7|while read day;do
+    cur_d=$((day+(n-1)*7-day1))
+    if [ $cur_m = "$m" -a $cur_d = "$d" ];then printf $REVERSE_WHITE
+    elif [ $day = 1 ];   then printf $RED
+    elif [ $day = 7 ];   then printf $BLUE
+    else                      printf $WHITE; fi
+    if [ $n = 0 ];then
+      printf "%s " `mydate $y-$cur_m-$(($day-day1+7)) 0 %a`
+    elif [ 0 -lt $cur_d -a $cur_d -le $lastd ]; then
+      printf "%2d " $cur_d
+    else
+      printf "   "
+    fi
+    printf $OFF;
+  done)";done
+  echo
+done
+```
+- 色指定の条件式に背景色と文字色反転するやつ追加しただけ
+- ```\033[37;7m```の```;7```はオプションで、背景色と文字色を反転させるという意味
+- 他にも```;1```でbold、```;4```でunderlineとか
+- オプション詳細は以下のリンクで
+- [シェル - echoで文字に色をつける その1 - Miuran Business Systems ](http://www.m-bsys.com/linux/echo-color-1)
+
+![カレンダー](07-highlight-date.png)
+
+
+
+## 引数の処理を修正した
+- ```calender```の第２，第３引数に0付きの数字を指定すると、```calender <year> <month> <date>```で指定日の色が変わらない
+- おそらく```"02" = "2"```みたいな比較になってる
+- 0消したい
+- [ bash で 0埋めされた数値文字列の不要な0を削除する（または0で始まる文字列を10進数として扱う） - Qiita](http://qiita.com/ma2saka/items/c9d599020353de2b47d2)
+```bash
+set +u;
+y="$1"
+m="$2"
+d="$3"
+set -u
+if [ "$y" = "" ]; then
+  y=${now:0:4}
+  m=$((10#${now:5:2}))
+  d=$((10#${now:8:2}))
+  from=$m;to=$m
+elif [ "$m" = "" ]; then
+  from=1;to=12
+else
+  from=$m;to=$m
+  m=$((10#$m))
+  if [ "$d" != "" ]; then
+    d=$((10#$d))
+  fi
+fi
+```
+- ```$((10#${STR}))```で10進数として扱える
+- 「10進数に変換する」のではなく、あくまで「10進数として扱う」
+- つまり```012```は```10```ではなく```12```になる(```0```を付けると8進数)
+
+![カレンダー](08-modify-args.png)
+- たぶんこれで大丈夫かな..
+
+
+
+## 取り敢えず完成した
+- 細かいとこで気になるとこはまだある
+- でももう寝たいので終わる
+- 16日中に終わらなかった..
+- 以下現時点でのコード
+```bash
+#!/bin/bash
+set -eu
+
+mydate() {
+  local readonly inf=%Y-%m-%d
+  local readonly ifD=`[ "$(uname)" = "Darwin" ]`
+  local opts=`$ifD && echo "-j -f $inf"` || echo "-d"
+  set +eu
+  date $opts $1>/dev/null 2>&1
+  local date=`[ $? != 0 ] && echo $(date +$inf) || echo $1`
+  expr 1 + $2>/dev/null 2>&1
+  local days=`[ $? -ge 2 ] && echo 0 || echo $2`
+  date $opts $date +$3>/dev/null 2>&1
+  local outf=`[[ $? != 0 || $3 = "" ]] && echo $inf || echo $3`
+  set -eu
+
+  local days=`[ 0 -le $days ] && echo +$days || echo $days`
+  local opts=`$ifD && echo "-j -v${days}d -f $inf $date +$outf" || echo "-d $date${days}days +$outf"`
+  echo `date $opts`
+}
+
+readonly OFF="\033[0m"
+readonly BLUE="\033[34m"
+readonly GRAY="\033[37;1m"
+readonly RED="\033[31m"
+readonly WHITE="\033[37m"
+readonly REVERSE_WHITE="\033[37;7m"
+readonly now=`date +%Y-%m-%d`
+
+set +u;
+y="$1"
+m="$2"
+d="$3"
+set -u
+if [ "$y" = "" ]; then
+  y=${now:0:4}
+  m=$((10#${now:5:2}))
+  d=$((10#${now:8:2}))
+  from=$m;to=$m
+elif [ "$m" = "" ]; then
+  from=1;to=12
+else
+  from=$m;to=$m
+  m=$((10#$m))
+  if [ "$d" != "" ]; then
+    d=$((10#$d))
+  fi
+fi
+
+seq $from $to|while read cur_m;do
+  day1=`mydate $y-$cur_m-01 0 %w`
+  lastd=`mydate $y-$((cur_m%12+1))-00 0 %d`
+  echo "      "`mydate $y-$cur_m-01 0 %B%Y`
+  seq 0 6|while read n;do echo "$(seq 1 7|while read day;do
+    cur_d=$((day+(n-1)*7-day1))
+    if [ $cur_m = "$m" -a $cur_d = "$d" ];then printf $REVERSE_WHITE
+    elif [ $day = 1 ];   then printf $RED
+    elif [ $day = 7 ];   then printf $BLUE
+    else                      printf $WHITE; fi
+    if [ $n = 0 ];then
+      printf "%s " `mydate $y-$cur_m-$(($day-day1+7)) 0 %a`
+    elif [ 0 -lt $cur_d -a $cur_d -le $lastd ]; then
+      printf "%2d " $cur_d
+    else
+      printf "   "
+    fi
+    printf $OFF;
+  done)";done
+  echo
+done
+
+```
+
+
+
 ## TODO
-- 何月かの表示
-- mydateの第2引数で+20など+月の数字を許容する
-- くそ重い
-- awk、sed、grep使う
+気が向いたら進めます
+- ```mydate```の第2引数で```+20```など+付きの数字を許容する
+- くそ重い、特に```calender <year>```のときやばい
+- awk、sed、grep使ってみる
+- 月と月の間の空行を１行に統一
+- 引数名考えるか```readonly```にしないと上書きしそうで怖い
