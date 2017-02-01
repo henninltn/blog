@@ -1,7 +1,7 @@
 ---
 title: Python3でマルバツゲームを作った話 (その２)
-date: 2017-01-27T01:40:00+09:00
-path: /2017/01/27/created-tic-tac-toe-in-python3-2/
+date: 2017-01-31T01:40:00+09:00
+path: /2017/01/31/created-tic-tac-toe-in-python3-2/
 tags: Python3 
 description: ジェネレータとか触った。
 ---
@@ -130,6 +130,34 @@ print(moves[Move(2, 1)]())  # => Pos(2, 2)
 - あと、そもそも```Moves```だけ取得できても意味なくね？```Board```も返すべきかも
 - [ジェネレータの使い方 - Qiita](http://qiita.com/Kodaira_/items/32b1ef860f59df80eedb)
 ```python
+def _init_game_tree_gen(tree: GameTree):
+    while True:
+        move = yield tree
+        tree = next_game_tree(tree, move) if move is not None else tree
 
+
+def init_game_tree_gen(tree: GameTree):
+    tree_gen = _init_game_tree_gen(tree)
+    tree_gen.__next__()
+    return tree_gen
 ```
+- 作ってから「俺は何がしたかったんだ」ってなりました
+- まずジェネレータの書き方は合ってるけど使い方間違ってる
+- しかもPython相互再帰できない、Land of Lispの再現は無理そう
+- Type Hints使った再帰的な型も定義できない、クラスで書くしかなさそう
+- クラスのフィールドに型ヒント付けられないっぽい..
+
+
+
+## 飽きた
+- 飽きました、もう辛いので途中でやめる
+- たまにじゃないけどこんなこともある
+
+
+
+## 成果っぽいものをまとめてみた
+- ユニットテストにチャレンジできた
+- ジェネレータにもチャレンジできた
+- クロージャの初歩的な罠に引っかかった
+- Python普通に楽しかった
 
