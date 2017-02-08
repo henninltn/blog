@@ -1,7 +1,7 @@
 ---
 title: Python3でマルバツゲームを作った話 (その２)
-date: 2017-01-31T01:40:00+09:00
-path: /2017/01/31/created-tic-tac-toe-in-python3-2/
+date: 2017-02-01T23:50:00+09:00
+path: /2017/02/01/created-tic-tac-toe-in-python3-2/
 tags: Python3 
 description: ジェネレータとか触った。
 ---

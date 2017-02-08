@@ -18,6 +18,8 @@ githubId = "henninltn"
 [[tags]]
   name = "Lisp"
 [[tags]]
+  name = "CommonLisp"
+[[tags]]
   name = "ShellScript"
 [[tags]]
   name = "ReactNative"
