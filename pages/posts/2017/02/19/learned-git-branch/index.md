@@ -2,7 +2,7 @@
 title: Gitのブランチについて調べた話
 date: 2017-02-19T21:20:00+09:00
 path: /2017/02/19/learned-git-branch/
-tags: Git
+tags: VCS, Git
 description: Gitでブランチを使った開発を始めた。
 ---
 
