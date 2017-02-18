@@ -76,6 +76,8 @@ $ git push origin <branch name>
 $ git checkout master
 
 $ git merge <branch name>
+
+$ git push -d origin <branch name>
 ```
 - まずは```git checkout <branch name>```でブランチを切るもととなるブランチに移動
 - そして```git checkout -b <branch name>```でブランチを作成してそこに入る
@@ -87,4 +89,5 @@ $ git merge <branch name>
 - [Gitでbranchを変えるときに、ファイルの変更はどう扱えばいいのか？ - QA@IT](http://qa.atmarkit.co.jp/q/3186)
 - 簡単に言うと```git stash save```でstashにしまって、```git stash pop```で取り出すだけ
 - 切ったブランチの作業が全て終わったら、元になるブランチにチェックアウトして```git merge <branch name>```でマージ
+- 元のブランチにマージしたブランチは削除しとくのがいいらしい
 
