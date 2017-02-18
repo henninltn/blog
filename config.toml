@@ -27,4 +27,10 @@ githubId = "henninltn"
   name = "Three.js"
 [[tags]]
   name = "Python3"
+[[tags]]
+  name = "VCS"
+[[tags]]
+  name = "Git"
+[[tags]]
+  name = "Mercurial"
 
