@@ -1,9 +1,9 @@
 ---
-title: OCamlチュートリアルを進めた話
-date: 2017-02-19T21:20:00+09:00
-path: /2017/06/28/ocaml-tutorial-1/
-tags: VCS, Git
-description: 公式サイトでOCamlの勉強を始めた。
+title: OCamlチュートリアルを進めた話(その１)
+date: 2017-07-04T13:40:00+09:00
+path: /2017/07/04/ocaml-tutorial-1/
+tags: ML, OCaml
+description: OCamlの基本とかモジュールの概要とか。
 ---
 
 
@@ -17,7 +17,7 @@ description: 公式サイトでOCamlの勉強を始めた。
 
 
 
-## はじめの一歩
+## [はじめの一歩](https://ocaml.org/learn/tutorials/basics.ja.html)
 
 ###  コメント
 ```ml
@@ -58,7 +58,7 @@ unit     ()
 
 
 
-## OCamlプログラムの構造
+## [OCamlプログラムの構造](https://ocaml.org/learn/tutorials/structure_of_ocaml_programs.ja.html)
 
 ### 束縛と変数
 - ローカル変数は```let name = expression in```、```;;```までがコードブロック(スコープ?)
@@ -221,5 +221,5 @@ let () =
 - 例その3。
 - え、上の例に```let _ = expression```とかないんですけど...
 - まあ返り値捨てて計算だけして、副作用起こすためのものっていうのは見れば分かる
-- あとは何行ってるかあんまり分かんなかったけどじっくり読み解くのだるいので飛ばすよ...
+- あとは何言うってるかあんまり分かんなかったけどじっくり読み解くのだるいので飛ばすよ...
 
