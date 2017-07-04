@@ -33,4 +33,10 @@ githubId = "henninltn"
   name = "Git"
 [[tags]]
   name = "Mercurial"
+[[tags]]
+  name = "ML"
+[[tags]]
+  name = "OCaml"
+[[tags]]
+  name = "SML"
 
