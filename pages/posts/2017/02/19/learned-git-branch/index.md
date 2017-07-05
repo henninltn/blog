@@ -76,9 +76,17 @@ $ git push origin <branch name>
 
 $ git checkout master
 
-$ git merge <branch name>
+# --no-ffを付けないとFast-forwardになってマージコミットがされない
+# git merge <branch name>
+$ git merge --no-ff <branch name>
 
+$ git push origin master
+
+# リモートのmerge済みブランチを削除
 $ git push -d origin <branch name>
+
+# ローカルのmerge済みブランチを削除
+$ git branch -D <branch name>
 ```
 - まずは```git checkout <branch name>```でブランチを切るもととなるブランチに移動
 - そして```git checkout -b <branch name>```でブランチを作成してそこに入る
