@@ -3,7 +3,7 @@ title: OCamlチュートリアルを進めた話(その４)
 date: 2017-07-07T12:20:00+09:00
 path: /2017/07/07/ocaml-tutorial-4/
 tags: ML, OCaml
-description: Maps、Sets、Hash Tablesについて。
+description: ヴァリアントとパターンマッチングについて。
 ---
 
 
