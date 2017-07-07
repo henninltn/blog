@@ -3,7 +3,7 @@ title: OCamlチュートリアルを進めた話(その４)
 date: 2017-07-07T12:20:00+09:00
 path: /2017/07/07/ocaml-tutorial-4/
 tags: ML, OCaml
-description: ヴァリアントとパターンマッチングについて。
+description: ヴァリアントとパターンマッチングについて。ついてでにNull的なものも。
 ---
 
 
@@ -96,8 +96,7 @@ Cons(1, Cons(2, Nil))
 ```
 type expr =
     | Plus of expr * expr
-    | Minus of expr * expr
-    | Times of expr * expr
+    | Minus of expr * expr | Times of expr * expr
     | Divide of expr * expr
     | Value of string
 
@@ -153,4 +152,14 @@ match value with
 ```
 - というわけでパターンマッチングの一般形
 - ちなみにコンパイル時に全てのパターンが網羅されているかチェックが入る
+
+
+## Null的なもの
+- [ヌルポインタ、assert、警告](https://ocaml.org/learn/tutorials/null_pointers_asserts_and_warnings.ja.html)
+- ```option```使う
+```
+type 'a option = None | Some of 'a
+```
+- HaskellでいうMaby的な?
+- まあHaskellのMabyと違ってモナドじゃないから取り出しの操作とかはいらなそう
 
